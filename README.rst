@@ -1,12 +1,22 @@
-DEPRECATED LIBRARY micropython-adafruit-ssd1306
-===============================================
+MicroPython driver for SSD1306 OLED displays
+============================================
 
-This library has been deprecated! We are leaving this up for historical and research purposes but archiving the repository.
+This library supports both I2C and SPI.
 
-We are now only supporting CircuitPython libraries.
+While this library is no longer supported by Adafruit (which prefers maintaining their own fork of Micropython), it is still
+fully functional, and quite useful. It uses the native Micropython framebuf interface.
 
-Check out this library if you're interested in using the SSD1306: https://github.com/adafruit/Adafruit_CircuitPython_SSD1306
+I've added screen mirroring & rotation support, and demo code.
 
-MicroPython driver for SSD1306 OLED displays.
+Here's how to get started:
 
-This driver is based on the SSD1306 driver in the MicroPython source but differs by supporting hardware I2C interfaces (like on the SAMD21 MicroPython port).
+import ssd1306
+from machine import SPI, Pin
+
+d = ssd1306.SSD1306_SPI(128, 64, SPI(1),
+        dc=Pin("B1", Pin.OUT),
+        res=Pin("C9", Pin.OUT),
+        cs=Pin("A8", Pin.OUT))
+d.text("Hello world!", 0, 0, 1)
+d.show()
+        
